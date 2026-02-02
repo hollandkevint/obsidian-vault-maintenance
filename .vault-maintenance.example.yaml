@@ -1,0 +1,103 @@
+# .vault-maintenance.yaml - Example Configuration
+# Copy to your vault root and customize
+
+# ============================================
+# REQUIRED: Where new content lands
+# ============================================
+landing_pad: "Inbox/"
+# Common alternatives:
+# landing_pad: "📥 Landing Pad/"
+# landing_pad: "00 - Inbox/"
+# landing_pad: "+Inbox/"
+
+# ============================================
+# REQUIRED: Where processed content goes
+# ============================================
+destinations:
+  # Literature notes from articles, PDFs, etc.
+  literature_notes: "Notes/Sources/"
+
+  # Blog ideas and drafts
+  blog_ideas: "Notes/Ideas/"
+
+  # Work-in-progress synthesis notes
+  processing: "Notes/Processing/"
+
+  # Meeting notes (if not using dedicated app)
+  meeting_notes: "Notes/Meetings/"
+
+# ============================================
+# OPTIONAL: MOC to auto-update
+# ============================================
+# Set to null to skip MOC updates
+primary_moc: "Notes/Sources-MOC.md"
+# primary_moc: null
+
+# ============================================
+# OPTIONAL: Authors to consolidate
+# ============================================
+# When 3+ items from same author appear, create single note
+known_authors:
+  - name: "Paul Graham"
+    topics: ["startups", "essays"]
+  - name: "Simon Willison"
+    topics: ["AI", "Python", "SQLite"]
+  - name: "Lenny Rachitsky"
+    topics: ["product management", "growth"]
+  # Add your frequently-read authors:
+  # - name: "Author Name"
+  #   topics: ["topic1", "topic2"]
+
+# ============================================
+# OPTIONAL: Keyword → tag mapping
+# ============================================
+# When keywords appear in content, apply these tags
+topic_rules:
+  - keywords: ["AI", "Claude", "GPT", "LLM", "prompt", "agent"]
+    tags: ["topic/ai"]
+
+  - keywords: ["product", "roadmap", "PM", "PRD", "user research"]
+    tags: ["topic/product"]
+
+  - keywords: ["startup", "founder", "VC", "fundraising"]
+    tags: ["topic/startups"]
+
+  - keywords: ["Python", "JavaScript", "code", "programming"]
+    tags: ["topic/programming"]
+
+  - keywords: ["data", "analytics", "SQL", "dashboard"]
+    tags: ["topic/data"]
+
+  # Add your own:
+  # - keywords: ["keyword1", "keyword2"]
+  #   tags: ["topic/your-topic"]
+
+# ============================================
+# OPTIONAL: Git settings
+# ============================================
+git:
+  # Set to false to disable auto-commits
+  enabled: true
+
+  # Prefix for commit messages
+  message_prefix: "vault: auto-organize"
+
+  # Co-author attribution
+  co_author: "Claude <noreply@anthropic.com>"
+
+# ============================================
+# OPTIONAL: Safety limits
+# ============================================
+# Maximum files to process per run (prevents runaway)
+max_files_per_run: 15
+
+# ============================================
+# OPTIONAL: Custom scripts
+# ============================================
+# Path to health check script (relative to vault root)
+# health_script: "Scripts/vault-health-monitor.py"
+health_script: null
+
+# Path to auto-tag script (relative to vault root)
+# auto_tag_script: "Scripts/auto-tag-content.py"
+auto_tag_script: null

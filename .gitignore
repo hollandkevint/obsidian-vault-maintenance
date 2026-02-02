@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Environment files with secrets
+.env
+.env.local
+
+# Logs
+*.log
+logs/

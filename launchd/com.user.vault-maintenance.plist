@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+  Obsidian Vault Maintenance - macOS launchd Job
+
+  Installation:
+    1. Copy to ~/Library/LaunchAgents/
+    2. Edit paths below to match your setup
+    3. Load: launchctl load ~/Library/LaunchAgents/com.user.vault-maintenance.plist
+
+  Manual trigger:
+    launchctl start com.user.vault-maintenance
+
+  Unload:
+    launchctl unload ~/Library/LaunchAgents/com.user.vault-maintenance.plist
+
+  View logs:
+    tail -f ~/.claude/logs/vault-maintenance.log
+-->
+<dict>
+    <key>Label</key>
+    <string>com.user.vault-maintenance</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>-c</string>
+        <!-- EDIT THIS PATH to match your script location -->
+        <string>$HOME/.claude/scripts/daily-vault-maintenance.sh &gt;&gt; $HOME/.claude/logs/vault-maintenance.log 2&gt;&amp;1</string>
+    </array>
+
+    <!-- Run daily at 9:00 AM -->
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>9</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <!-- EDIT THIS PATH -->
+    <string>/Users/YOUR_USERNAME/.claude/logs/vault-maintenance-stdout.log</string>
+
+    <key>StandardErrorPath</key>
+    <!-- EDIT THIS PATH -->
+    <string>/Users/YOUR_USERNAME/.claude/logs/vault-maintenance-stderr.log</string>
+
+    <!-- EDIT THIS PATH to your vault -->
+    <key>WorkingDirectory</key>
+    <string>/Users/YOUR_USERNAME/Documents/Obsidian Vault</string>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+        <key>HOME</key>
+        <!-- EDIT THIS PATH -->
+        <string>/Users/YOUR_USERNAME</string>
+    </dict>
+</dict>
+</plist>
